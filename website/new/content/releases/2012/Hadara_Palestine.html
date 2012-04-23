@@ -1,0 +1,333 @@
+{% extends "_report.html" %}
+
+{%load webdesign %}
+
+{%hyde
+    title: Hadara Palestine
+    ooni_test: HTTP Host
+    country: Palestine
+    provider: Hadara, Paltel
+    product: Squid
+    product_website: http://www.squid-cache.org/
+    censorship_method: Transparent HTTP proxy
+    created: 2012-04-23 02:00:00
+    downloads:
+        - ['Full scan result', '/media/releases/2012/Hadara_Palestine/hadara_palestine.yamlooni.tar.gz']
+        - ['List of censored sites', '/media/releases/2012/Hadara_Palestine/censored-sites.txt']
+%}
+
+{% block article %}
+
+{%article%}
+<p>
+This is the technical report on the politically motivated censorship going on in Bethlehem, West
+Bank.
+</p>
+
+These are the networks in question:
+<pre>
+inetnum:         82.205.96.0 - 82.205.103.255
+netname:         GZ-HOME-BR1
+descr:           GAZA BSA HOME
+country:         PS
+admin-c:         WK4085-RIPE
+tech-c:          HT1472-RIPE
+status:          ASSIGNED PA
+mnt-by:          Palnet-mnt
+source:          RIPE # Filtered
+
+inetnum:         212.106.88.0 - 212.106.95.255
+netname:         RA-HM-ASR-02
+descr:           Hadara Ramallah BSA
+country:         PS
+admin-c:         WK4085-RIPE
+tech-c:          HT1472-RIPE
+status:          Assigned PA
+mnt-by:          Palnet-MNT
+source:          RIPE # Filtered
+</pre>
+
+<p>The technique being used to restrict access to content is a transparent HTTP
+proxy. What this does is intercept every HTTP request being made and process it
+internally. If the content is cached it will serve the cached version of the
+content. If the content is to be blocked it will serve a blocked page.</p>
+
+<p>We developed a test that opens a connection on port 80 towards a known
+unrestricted host. Keep in mind that it's irrelevant to what destination the
+connection is opened because the transparent HTTP proxy will intercept all HTTP
+requests, meaning that all clients are in reality always only speaking to the proxy.
+Once we have a connection open we do HTTP GET requests with a changed Host header field.
+If the result is the block page then the content is restricted.</p>
+
+<p>We have identified two different block pages that were interchanged at a
+certain point during our tests:</p>
+
+<h6>First block page</h6>
+<pre>
+HTTP/1.0 403 Forbidden
+Server: squid
+Date: Wed, 11 Apr 2012 05:47:10 GMT
+Content-Type: text/html
+Content-Length: 21
+Connection: close
+
+Sorry, Access Denied
+</pre>
+
+<h6>Second block page</h6>
+<pre>
+HTTP/1.0 403 Forbidden
+Server: squid
+Date: Sun, 22 Apr 2012 20:55:34 GMT
+Content-Type: text/html
+Content-Length: 2205
+Connection: close
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-type&quot; content=&quot;text/html; charset=iso-8859-1&quot;&gt;
+        &lt;title&gt;ERROR: The requested URL could not be retrieved&lt;/title&gt;
+        &lt;style type=&quot;text/css&quot;&gt;
+            #logo {
+                margin: 0 auto;
+                display: block;
+            }
+            hr {
+                height: 1px;
+                border: none;
+                background: gray;
+                margin: 1em 0;
+            }
+            h1 {
+                padding: 0;
+                font-size: 1.5em;
+                margin: 0;
+            }
+            h2 {
+                padding: 0;
+                font-size: 1.2em;
+                margin: 0 0 1em 0;
+            }
+            body {
+                font-family: sans-serif;
+                padding: 1em 0;
+            }
+            #content {
+                margin: 0 auto;
+                max-width: 800px;
+                border: 1px solid gray;
+                background: #eee;
+                padding: 1em 2em;
+                -moz-border-radius: 16px;
+            }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;content&quot;&gt;
+
+        &lt;h1&gt;ERROR&lt;/h1&gt;
+        &lt;h2&gt;The requested URL could not be retrieved&lt;/h2&gt;
+        &lt;hr/&gt;
+
+&lt;P&gt;
+While trying to retrieve the URL:
+&lt;A HREF=&quot;http://fateh-voice.ps/&quot;&gt;http://fateh-voice.ps/&lt;/A&gt;
+&lt;P&gt;
+The following error was encountered:
+&lt;UL&gt;
+&lt;LI&gt;
+&lt;STRONG&gt;
+Access Denied.
+&lt;/STRONG&gt;
+&lt;P&gt;
+Access control configuration prevents your request from
+being allowed at this time.  Please contact your service provider if
+you feel this is incorrect.
+&lt;/UL&gt;
+&lt;P&gt;Your cache administrator is &lt;A HREF=&quot;mailto:webmaster&quot;&gt;webmaster&lt;/A&gt;.
+        &lt;/div&gt;
+    &lt;!--
+  -- Unfortunately, Microsoft has added a clever new
+  -- feature to Internet Explorer.  If the text in
+  -- an errors message is too small, specifically
+  -- less than 512 bytes, Internet Explorer returns
+  -- its own error message.  Yes, you can turn that
+  -- off, but *surprise* its pretty tricky to find
+  -- buried as a switch called smart error
+  -- messages  That means, of course, that many of
+  -- Resins error messages are censored by default.
+  -- And, of course, youll be shocked to learn that
+  -- IIS always returns error messages that are long
+  -- enough to make Internet Explorer happy.  The
+  -- workaround is pretty simple: pad the error
+  -- message with a big comment to push it over the
+  -- five hundred and twelve byte minimum.  Of course,
+  -- thats exactly what youre reading right now.
+//--&gt;
+&lt;/body&gt;&lt;/html&gt;
+</pre>
+
+<p>
+From the response headers of a blocked page we are able to learn that the
+software being used is Squid.</p>
+
+<p>We scanned more than 1 million hostnames and only detected censorship on 8 of
+these.</p>
+<p>The full scan results are available in an unredacted from <a href="/media/releases/2012/Hadara_Palestine/hadara_palestine.yamlooni.tar.gz">here</a></p>
+
+<p>At a certain point we decided to go for a high level of parallelism and not
+care about timeout errors. This is because the transparent HTTP proxy is
+intercepting our request and making them for us. This means that if a
+certain hostname is to be blocked it will reply with the block page
+instantenously without processing it. If the site is in the blocklist a
+connection attempt to it will never timeout.</p>
+
+<p>What this means, though, is that sites blocked with some more sophisticated
+techniques would not have been detected. Though by seeing the kind of setup
+that was deployed in this case we find it unlikely that access to content
+would be restricted with some more advanced setup and that they would be
+using a mix between squid transparent HTTP proxy censorship and other.</p>
+
+<p>The sites whose access is being restricted access to are:</p>
+
+<ol>
+<li>pal-home.net</li>
+<li>kofiapress.com</li>
+<li>amad.ps</li>
+<li>inlightpress.com</li>
+<li>fpnp.net</li>
+<li>fateh-voice.ps</li>
+<li>karamapress.com</li>
+<li>milad.ps</li>
+</ol>
+
+<!-- END ROW -->
+</div>
+
+<div class="row thumbrow">
+<!-- BEGIN ROW -->
+
+<div class="span3">
+  <div class="modal hide fade" id="Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/palhome.png">
+  </div>
+  <div class="thumbnail">
+  <a data-toggle="modal" href="#Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/palhome.png" height="180px" width="260px">
+</a>
+  <div class="caption">
+    <h5>http://pal-home.net</h5>
+  </div>
+  </div>
+</div>
+
+<div class="span3">
+  <div class="modal hide fade" id="Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/milad.png">
+  </div>
+  <div class="thumbnail">
+  <a data-toggle="modal" href="#Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/milad.png" height="180px" width="260px">
+</a>
+  <div class="caption">
+    <h5>http://milad.ps</h5>
+  </div>
+  </div>
+</div>
+
+<div class="span3">
+  <div class="modal hide fade" id="Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/karamapress.png">
+  </div>
+  <div class="thumbnail">
+  <a data-toggle="modal" href="#Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/karamapress.png" height="180px" width="260px">
+</a>
+  <div class="caption">
+    <h5>http://karamapress.com</h5>
+  </div>
+  </div>
+</div>
+</div>
+
+<div class="row thumbrow">
+<!-- BEGIN ROW -->
+
+
+<div class="span3">
+  <div class="modal hide fade" id="Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/inlightpress.png">
+  </div>
+  <div class="thumbnail">
+  <a data-toggle="modal" href="#Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/inlightpress.png" height="180px" width="260px">
+</a>
+  <div class="caption">
+    <h5>http://inlightpress.com</h5>
+  </div>
+  </div>
+</div>
+
+<div class="span3">
+  <div class="modal hide fade" id="Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/fpnp.png">
+  </div>
+  <div class="thumbnail">
+  <a data-toggle="modal" href="#Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/fpnp.png" height="180px" width="260px">
+</a>
+  <div class="caption">
+    <h5>http://fpnp.net</h5>
+  </div>
+  </div>
+</div>
+
+
+<div class="span3">
+  <div class="modal hide fade" id="Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/fateh-voice.png">
+  </div>
+  <div class="thumbnail">
+  <a data-toggle="modal" href="#Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/fateh-voice.png" height="180px" width="260px">
+</a>
+  <div class="caption">
+    <h5>http://fateh-voice.ps</h5>
+  </div>
+  </div>
+</div>
+
+<!-- END ROW -->
+</div>
+<div class="row thumbrow">
+<!-- BEGIN ROW -->
+
+
+<div class="span3">
+  <div class="modal hide fade" id="Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/amad.png">
+  </div>
+  <div class="thumbnail">
+  <a data-toggle="modal" href="#Screenshot41">
+    <img src="/media/releases/2012/Hadara_Palestine/screenshot/amad.png" height="180px" width="260px">
+</a>
+  <div class="caption">
+    <h5>http://amad.ps</h5>
+  </div>
+  </div>
+</div>
+
+<!-- END ROW -->
+</div>
+<p>For more details on the political implications check see the <a
+    href="http://www.maannews.net/eng/ViewDetails.aspx?ID=478726">article by
+    George Hale on Ma'An News</a></p>
+
+
+
+<!-- END -->
+</div>
+{%endarticle%}
+
+{% endblock %}
