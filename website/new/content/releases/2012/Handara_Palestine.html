@@ -181,10 +181,10 @@ care about timeout errors. This is because the transparent HTTP proxy is
 intercepting our request and making them for us. This means that if a
 certain hostname is to be blocked it will reply with the block page
 instantenously without processing it. If the site is in the blocklist a
-connection attempt to it will never go in timeout.</p>
+connection attempt to it will never timeout.</p>
 
 <p>What this means, though, is that sites blocked with some more sophisticated
-techniques would not have been detected. Though by seing the kind of setup
+techniques would not have been detected. Though by seeing the kind of setup
 that was deployed in this case we find it unlikely that access to content
 would be restricted with some more advanced setup and that they would be
 using a mix between squid transparent HTTP proxy censorship and other.</p>
