@@ -53,3 +53,69 @@
 [22/Mar/2012:19:20:37] ENGINE Started monitor thread '_TimeoutMonitor'.
 [22/Mar/2012:19:20:38] ENGINE Serving on localhost:8080
 [22/Mar/2012:19:20:38] ENGINE Bus STARTED
+[23/Apr/2012:21:47:37] ENGINE Bus STARTING
+[23/Apr/2012:21:47:37] ENGINE Started monitor thread '_TimeoutMonitor'.
+[23/Apr/2012:21:47:38] ENGINE Serving on localhost:8080
+[23/Apr/2012:21:47:38] ENGINE Bus STARTED
+[23/Apr/2012:21:47:48] ENGINE Keyboard Interrupt: shutting down bus
+[23/Apr/2012:21:47:48] ENGINE Bus STOPPING
+[23/Apr/2012:21:47:53] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('localhost', 8080)) shut down
+[23/Apr/2012:21:47:53] ENGINE Stopped thread '_TimeoutMonitor'.
+[23/Apr/2012:21:47:53] ENGINE Bus STOPPED
+[23/Apr/2012:21:47:53] ENGINE Bus EXITING
+[23/Apr/2012:21:47:53] ENGINE Bus EXITED
+[23/Apr/2012:21:47:53] ENGINE Waiting for child threads to terminate...
+[23/Apr/2012:21:47:53] ENGINE Waiting for thread CP Server Thread-9.
+[23/Apr/2012:21:47:57] ENGINE Waiting for thread CP Server Thread-10.
+[23/Apr/2012:21:49:29] ENGINE Bus STARTING
+[23/Apr/2012:21:49:29] ENGINE Started monitor thread '_TimeoutMonitor'.
+[23/Apr/2012:21:49:30] ENGINE Serving on localhost:8080
+[23/Apr/2012:21:49:30] ENGINE Bus STARTED
+[23/Apr/2012:21:49:52] ENGINE Keyboard Interrupt: shutting down bus
+[23/Apr/2012:21:49:52] ENGINE Bus STOPPING
+[23/Apr/2012:21:49:52] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('localhost', 8080)) shut down
+[23/Apr/2012:21:49:52] ENGINE Stopped thread '_TimeoutMonitor'.
+[23/Apr/2012:21:49:52] ENGINE Bus STOPPED
+[23/Apr/2012:21:49:52] ENGINE Bus EXITING
+[23/Apr/2012:21:49:52] ENGINE Bus EXITED
+[23/Apr/2012:21:49:52] ENGINE Waiting for child threads to terminate...
+[23/Apr/2012:21:50:36] ENGINE Bus STARTING
+[23/Apr/2012:21:50:36] ENGINE Started monitor thread '_TimeoutMonitor'.
+[23/Apr/2012:21:50:36] ENGINE Serving on localhost:8080
+[23/Apr/2012:21:50:36] ENGINE Bus STARTED
+[23/Apr/2012:21:50:47] ENGINE Keyboard Interrupt: shutting down bus
+[23/Apr/2012:21:50:47] ENGINE Bus STOPPING
+[23/Apr/2012:21:50:49] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('localhost', 8080)) shut down
+[23/Apr/2012:21:50:49] ENGINE Stopped thread '_TimeoutMonitor'.
+[23/Apr/2012:21:50:49] ENGINE Bus STOPPED
+[23/Apr/2012:21:50:49] ENGINE Bus EXITING
+[23/Apr/2012:21:50:49] ENGINE Bus EXITED
+[23/Apr/2012:21:50:49] ENGINE Waiting for child threads to terminate...
+[23/Apr/2012:21:50:49] ENGINE Waiting for thread CP Server Thread-8.
+[23/Apr/2012:21:52:34] ENGINE Bus STARTING
+[23/Apr/2012:21:52:34] ENGINE Started monitor thread '_TimeoutMonitor'.
+[23/Apr/2012:21:52:35] ENGINE Serving on localhost:8080
+[23/Apr/2012:21:52:35] ENGINE Bus STARTED
+[23/Apr/2012:21:52:39] ENGINE Keyboard Interrupt: shutting down bus
+[23/Apr/2012:21:52:39] ENGINE Bus STOPPING
+[23/Apr/2012:21:52:44] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('localhost', 8080)) shut down
+[23/Apr/2012:21:52:44] ENGINE Stopped thread '_TimeoutMonitor'.
+[23/Apr/2012:21:52:44] ENGINE Bus STOPPED
+[23/Apr/2012:21:52:44] ENGINE Bus EXITING
+[23/Apr/2012:21:52:44] ENGINE Bus EXITED
+[23/Apr/2012:21:52:44] ENGINE Waiting for child threads to terminate...
+[23/Apr/2012:21:52:44] ENGINE Waiting for thread CP Server Thread-11.
+[23/Apr/2012:21:54:13] ENGINE Bus STARTING
+[23/Apr/2012:21:54:13] ENGINE Started monitor thread '_TimeoutMonitor'.
+[23/Apr/2012:21:54:13] ENGINE Serving on localhost:8080
+[23/Apr/2012:21:54:13] ENGINE Bus STARTED
+[23/Apr/2012:21:54:18] ENGINE Keyboard Interrupt: shutting down bus
+[23/Apr/2012:21:54:18] ENGINE Bus STOPPING
+[23/Apr/2012:21:54:23] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('localhost', 8080)) shut down
+[23/Apr/2012:21:54:23] ENGINE Stopped thread '_TimeoutMonitor'.
+[23/Apr/2012:21:54:23] ENGINE Bus STOPPED
+[23/Apr/2012:21:54:23] ENGINE Bus EXITING
+[23/Apr/2012:21:54:23] ENGINE Bus EXITED
+[23/Apr/2012:21:54:23] ENGINE Waiting for child threads to terminate...
+[23/Apr/2012:21:54:23] ENGINE Waiting for thread CP Server Thread-11.
+[23/Apr/2012:21:54:23] ENGINE Waiting for thread CP Server Thread-10.

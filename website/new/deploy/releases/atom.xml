@@ -1,5 +1,316 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>OONI releases</title><link href="http://www.ooni.nu/releases/atom.xml" rel="self"/><link href="http://www.ooni.nu"/><updated>2012-03-23T00:46:31Z</updated><id>http://www.ooni.nu</id><entry><title>T-Mobile USA Web Guard</title><author><name>Arturo Filasto&#39;</name></author><link href="http://www.ooni.nu/releases/2012/T-Mobile_USA_WebGuard.html"/><updated>2012-03-21T02:00:00Z</updated><published>2012-03-21T02:00:00Z</published><id>http://www.ooni.nu/releases/2012/T-Mobile_USA_WebGuard.html</id><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>OONI releases</title><link href="http://www.ooni.nu/releases/atom.xml" rel="self"/><link href="http://www.ooni.nu"/><updated>2012-04-23T21:53:51Z</updated><id>http://www.ooni.nu</id><entry><title>Handara Palestine</title><author><name>Arturo Filasto&#39;</name></author><link href="http://www.ooni.nu/releases/2012/Handara_Palestine.html"/><updated>2012-04-23T02:00:00Z</updated><published>2012-04-23T02:00:00Z</published><id>http://www.ooni.nu/releases/2012/Handara_Palestine.html</id><content type="html">
+       
+
+&lt;p&gt;
+This is the technical report on the politically motivated censorship going on in Bethlehem, West&amp;nbsp;Bank.
+&lt;/p&gt;
+
+&lt;p&gt;These are the networks in question:
+&lt;pre&gt;
+inetnum:         82.205.96.0 - 82.205.103.255
+netname:         GZ-HOME-BR1
+descr:           GAZA BSA HOME
+country:         PS
+admin-c:         WK4085-RIPE
+tech-c:          HT1472-RIPE
+status:          ASSIGNED PA
+mnt-by:          Palnet-mnt
+source:          RIPE #&amp;nbsp;Filtered&lt;/p&gt;
+&lt;p&gt;inetnum:         212.106.88.0 - 212.106.95.255
+netname:         RA-HM-ASR-02
+descr:           Hadara Ramallah BSA
+country:         PS
+admin-c:         WK4085-RIPE
+tech-c:          HT1472-RIPE
+status:          Assigned PA
+mnt-by:          Palnet-MNT
+source:          RIPE # Filtered
+&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;The technique being used to restrict access to content is a transparent HTTP
+proxy. What this does is intercept every HTTP request being made and process it
+internally. If the content is cached it will serve the cached version of the
+content. If the content is to be blocked it will serve a blocked&amp;nbsp;page.&lt;/p&gt;
+
+&lt;p&gt;We developed a test that opens a connection on port 80 towards a known
+unrestricted host. Keep in mind that its&#39; irrelevant to what destination the
+connection is opened because the transparent HTTP proxy will intercept all HTTP
+requests, meaning that all clients are in reality always only speaking to the proxy.
+Once we have a connection open we do HTTP GET requests with a changed Host header field.
+If the result is the block page then the content is&amp;nbsp;restricted.&lt;/p&gt;
+
+&lt;p&gt;We have identified two different block pages that were interchanged at a
+certain point during our&amp;nbsp;tests:&lt;/p&gt;
+
+&lt;h6&gt;First block&amp;nbsp;page&lt;/h6&gt;
+
+&lt;pre&gt;
+HTTP/1.0 403 Forbidden
+Server: squid
+Date: Wed, 11 Apr 2012 05:47:10 GMT
+Content-Type: text/html
+Content-Length: 21
+Connection: close
+
+Sorry, Access Denied
+&lt;/pre&gt;
+
+&lt;h6&gt;Second block&amp;nbsp;page&lt;/h6&gt;
+
+&lt;pre&gt;
+HTTP/1.0 403 Forbidden
+Server: squid
+Date: Sun, 22 Apr 2012 20:55:34 GMT
+Content-Type: text/html
+Content-Length: 2205
+Connection: close
+
+&amp;lt;!DOCTYPE HTML PUBLIC &amp;quot;-//W3C//DTD HTML 4.01 Transitional//EN&amp;quot; &amp;quot;http://www.w3.org/TR/html4/loose.dtd&amp;quot;&amp;gt;
+&amp;lt;html&amp;gt;
+    &amp;lt;head&amp;gt;
+        &amp;lt;meta http-equiv=&amp;quot;Content-type&amp;quot; content=&amp;quot;text/html; charset=iso-8859-1&amp;quot;&amp;gt;
+        &amp;lt;title&amp;gt;ERROR: The requested URL could not be retrieved&amp;lt;/title&amp;gt;
+        &amp;lt;style type=&amp;quot;text/css&amp;quot;&amp;gt;
+            #logo {
+                margin: 0 auto;
+                display: block;
+            }
+            hr {
+                height: 1px;
+                border: none;
+                background: gray;
+                margin: 1em 0;
+            }
+            h1 {
+                padding: 0;
+                font-size: 1.5em;
+                margin: 0;
+            }
+            h2 {
+                padding: 0;
+                font-size: 1.2em;
+                margin: 0 0 1em 0;
+            }
+            body {
+                font-family: sans-serif;
+                padding: 1em 0;
+            }
+            #content {
+                margin: 0 auto;
+                max-width: 800px;
+                border: 1px solid gray;
+                background: #eee;
+                padding: 1em 2em;
+                -moz-border-radius: 16px;
+            }
+        &amp;lt;/style&amp;gt;
+    &amp;lt;/head&amp;gt;
+    &amp;lt;body&amp;gt;
+        &amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;
+
+        &amp;lt;h1&amp;gt;ERROR&amp;lt;/h1&amp;gt;
+        &amp;lt;h2&amp;gt;The requested URL could not be retrieved&amp;lt;/h2&amp;gt;
+        &amp;lt;hr/&amp;gt;
+
+&amp;lt;P&amp;gt;
+While trying to retrieve the URL:
+&amp;lt;A HREF=&amp;quot;http://fateh-voice.ps/&amp;quot;&amp;gt;http://fateh-voice.ps/&amp;lt;/A&amp;gt;
+&amp;lt;P&amp;gt;
+The following error was encountered:
+&amp;lt;UL&amp;gt;
+&amp;lt;LI&amp;gt;
+&amp;lt;STRONG&amp;gt;
+Access Denied.
+&amp;lt;/STRONG&amp;gt;
+&amp;lt;P&amp;gt;
+Access control configuration prevents your request from
+being allowed at this time.  Please contact your service provider if
+you feel this is incorrect.
+&amp;lt;/UL&amp;gt;
+&amp;lt;P&amp;gt;Your cache administrator is &amp;lt;A HREF=&amp;quot;mailto:webmaster&amp;quot;&amp;gt;webmaster&amp;lt;/A&amp;gt;.
+        &amp;lt;/div&amp;gt;
+    &amp;lt;!--
+  -- Unfortunately, Microsoft has added a clever new
+  -- feature to Internet Explorer.  If the text in
+  -- an errors message is too small, specifically
+  -- less than 512 bytes, Internet Explorer returns
+  -- its own error message.  Yes, you can turn that
+  -- off, but *surprise* its pretty tricky to find
+  -- buried as a switch called smart error
+  -- messages  That means, of course, that many of
+  -- Resins error messages are censored by default.
+  -- And, of course, youll be shocked to learn that
+  -- IIS always returns error messages that are long
+  -- enough to make Internet Explorer happy.  The
+  -- workaround is pretty simple: pad the error
+  -- message with a big comment to push it over the
+  -- five hundred and twelve byte minimum.  Of course,
+  -- thats exactly what youre reading right now.
+//--&amp;gt;
+&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;
+&lt;/pre&gt;
+
+&lt;p&gt;
+From the response headers of a blocked page we are able un learn that the
+software being used is&amp;nbsp;Squid.&lt;/p&gt;
+
+&lt;p&gt;We scanned more than 1 million hostnames and only detected censorship on 8 of&amp;nbsp;these.&lt;/p&gt;
+
+&lt;p&gt;The full scan results are available in an unredacted form&amp;nbsp;here:&lt;/p&gt;
+
+&lt;p&gt;At a certain point we decided to go for a high level of parallelism and not
+care about timeout errors. This is because the transparent HTTP proxy is
+intercepting our request and making them for us. This means that if a
+certain hostname is to be blocked it will reply with the block page
+instantenously without processing it. If the site is in the blocklist a
+connection attempt to it will never go in&amp;nbsp;timeout.&lt;/p&gt;
+
+&lt;p&gt;What this means, though, is that sites blocked with some more sophisticated
+techniques would not have been detected. Though by seing the kind of setup
+that was deployed in this case we find it unlikely that access to content
+would be restricted with some more advanced setup and that they would be
+using a mix between squid transparent HTTP proxy censorship and&amp;nbsp;other.&lt;/p&gt;
+
+&lt;p&gt;The sites whose access is being restricted access to&amp;nbsp;are:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;pal-home.net&lt;/li&gt;
+&lt;li&gt;kofiapress.com&lt;/li&gt;
+&lt;li&gt;amad.ps&lt;/li&gt;
+&lt;li&gt;inlightpress.com&lt;/li&gt;
+&lt;li&gt;fpnp.net&lt;/li&gt;
+&lt;li&gt;fateh-voice.ps&lt;/li&gt;
+&lt;li&gt;karamapress.com&lt;/li&gt;
+&lt;li&gt;milad.ps&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- END ROW --&gt;
+
+&lt;/div&gt;
+
+&lt;div class=&quot;row thumbrow&quot;&gt;
+&lt;!-- BEGIN ROW --&gt;
+
+&lt;div class=&quot;span3&quot;&gt;
+  &lt;div class=&quot;modal hide fade&quot; id=&quot;Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/palhome.png&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;thumbnail&quot;&gt;
+  &lt;a data-toggle=&quot;modal&quot; href=&quot;#Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/palhome.png&quot; height=&quot;180px&quot; width=&quot;260px&quot;&gt;
+&lt;/a&gt;
+  &lt;div class=&quot;caption&quot;&gt;
+    &lt;h5&gt;http://pal-home.net&lt;/h5&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;span3&quot;&gt;
+  &lt;div class=&quot;modal hide fade&quot; id=&quot;Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/milad.png&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;thumbnail&quot;&gt;
+  &lt;a data-toggle=&quot;modal&quot; href=&quot;#Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/milad.png&quot; height=&quot;180px&quot; width=&quot;260px&quot;&gt;
+&lt;/a&gt;
+  &lt;div class=&quot;caption&quot;&gt;
+    &lt;h5&gt;http://milad.ps&lt;/h5&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;span3&quot;&gt;
+  &lt;div class=&quot;modal hide fade&quot; id=&quot;Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/karamapress.png&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;thumbnail&quot;&gt;
+  &lt;a data-toggle=&quot;modal&quot; href=&quot;#Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/karamapress.png&quot; height=&quot;180px&quot; width=&quot;260px&quot;&gt;
+&lt;/a&gt;
+  &lt;div class=&quot;caption&quot;&gt;
+    &lt;h5&gt;http://karamapress.com&lt;/h5&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row thumbrow&quot;&gt;
+&lt;!-- BEGIN ROW --&gt;
+
+&lt;div class=&quot;span3&quot;&gt;
+  &lt;div class=&quot;modal hide fade&quot; id=&quot;Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/inlightpress.png&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;thumbnail&quot;&gt;
+  &lt;a data-toggle=&quot;modal&quot; href=&quot;#Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/inlightpress.png&quot; height=&quot;180px&quot; width=&quot;260px&quot;&gt;
+&lt;/a&gt;
+  &lt;div class=&quot;caption&quot;&gt;
+    &lt;h5&gt;http://inlightpress.com&lt;/h5&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;span3&quot;&gt;
+  &lt;div class=&quot;modal hide fade&quot; id=&quot;Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/fpnp.png&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;thumbnail&quot;&gt;
+  &lt;a data-toggle=&quot;modal&quot; href=&quot;#Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/fpnp.png&quot; height=&quot;180px&quot; width=&quot;260px&quot;&gt;
+&lt;/a&gt;
+  &lt;div class=&quot;caption&quot;&gt;
+    &lt;h5&gt;http://fpnp.net&lt;/h5&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;span3&quot;&gt;
+  &lt;div class=&quot;modal hide fade&quot; id=&quot;Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/fateh-voice.png&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;thumbnail&quot;&gt;
+  &lt;a data-toggle=&quot;modal&quot; href=&quot;#Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/fateh-voice.png&quot; height=&quot;180px&quot; width=&quot;260px&quot;&gt;
+&lt;/a&gt;
+  &lt;div class=&quot;caption&quot;&gt;
+    &lt;h5&gt;http://fateh-voice.ps&lt;/h5&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- END ROW --&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row thumbrow&quot;&gt;
+&lt;!-- BEGIN ROW --&gt;
+
+&lt;div class=&quot;span3&quot;&gt;
+  &lt;div class=&quot;modal hide fade&quot; id=&quot;Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/amad.png&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;thumbnail&quot;&gt;
+  &lt;a data-toggle=&quot;modal&quot; href=&quot;#Screenshot41&quot;&gt;
+    &lt;img src=&quot;/media/releases/2012/Handara_Palestine/screenshot/amad.png&quot; height=&quot;180px&quot; width=&quot;260px&quot;&gt;
+&lt;/a&gt;
+  &lt;div class=&quot;caption&quot;&gt;
+    &lt;h5&gt;http://amad.ps&lt;/h5&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- END ROW --&gt;
+&lt;/div&gt;
+
+&lt;p&gt;For more details on the political implications check see the &lt;a
+    href=&quot;http://www.maannews.net/eng/ViewDetails.aspx?ID=478726&quot;&gt;article by
+    George Hale on Ma&#39;An&amp;nbsp;News&lt;/a&gt;&lt;/p&gt;
+
+&lt;!-- END --&gt;
+
+&lt;p&gt;&lt;/div&gt;
+
+   </content></entry><entry><title>T-Mobile USA Web Guard</title><author><name>Arturo Filasto&#39;</name></author><link href="http://www.ooni.nu/releases/2012/T-Mobile_USA_WebGuard.html"/><updated>2012-03-21T02:00:00Z</updated><published>2012-03-21T02:00:00Z</published><id>http://www.ooni.nu/releases/2012/T-Mobile_USA_WebGuard.html</id><content type="html">
        
 
 &lt;p&gt;T-Mobile USA offers a &quot;feature&quot; to restrict access to certain
