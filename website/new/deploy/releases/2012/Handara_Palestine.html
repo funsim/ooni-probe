@@ -210,7 +210,7 @@ internally. If the content is cached it will serve the cached version of the
 content. If the content is to be blocked it will serve a blocked&nbsp;page.</p>
 
 <p>We developed a test that opens a connection on port 80 towards a known
-unrestricted host. Keep in mind that its' irrelevant to what destination the
+unrestricted host. Keep in mind that it's irrelevant to what destination the
 connection is opened because the transparent HTTP proxy will intercept all HTTP
 requests, meaning that all clients are in reality always only speaking to the proxy.
 Once we have a connection open we do HTTP GET requests with a changed Host header field.
@@ -328,7 +328,7 @@ you feel this is incorrect.
 </pre>
 
 <p>
-From the response headers of a blocked page we are able un learn that the
+From the response headers of a blocked page we are able to learn that the
 software being used is&nbsp;Squid.</p>
 
 <p>We scanned more than 1 million hostnames and only detected censorship on 8 of&nbsp;these.</p>
