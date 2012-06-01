@@ -4,7 +4,8 @@ This test performs a traceroute using multiple protocols.
 from zope.interface import implements
 from twisted.python import usage
 from twisted.plugin import IPlugin
-from plugoo.tests import ITest, OONITest
+from ooni.plugoo.tests import ITest, OONITest
+from ooni.plugoo.assets import Asset
 
 class MultiProtocolTracerouteArgs(usage.Options):
     optParameters = [['asset', 'a', None, 'Asset file'],
@@ -25,11 +26,17 @@ class MultiProtocolTracerouteTest(OONITest):
 
     def experiment(self, args):
         # What you return here gets handed as input to control
+        from scapy.all import TCP, UDP, ICMP
+        import MPT_scapy 
+        MPT_scapy.traceroute('www.google.de', protocol = TCP, dport=80)
+        traceroute('www.google.de', protocol = TCP, dport=53)
+        traceroute('www.google.de', protocol = UDP, dport=53)
+        traceroute('www.google.de', protocol = ICMP, dport=53)
         return {}
 
     def load_assets(self):
         if self.local_options:
-            return {'asset': Asset(self.local_options['asset'])}
+            return {'asset': None}
         else:
             return {}
 

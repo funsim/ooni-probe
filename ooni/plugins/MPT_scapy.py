@@ -2,7 +2,7 @@ import os,time,struct,re,socket,new
 from scapy.all import *
 
 ### Create a new packet list
-class MultiTracerouteResult(TracerouteResult):
+class MultiProtocolTracerouteResult(TracerouteResult):
 
     def get_trace(self):
         trace = {}
@@ -62,7 +62,7 @@ traceroute(target, [maxttl=30,] [dport=80,] [sport=80,] [verbose=conf.verb]) -> 
         a,b = sr(IP(dst=target, id=RandShort(), ttl=(minttl,maxttl))/l4,
                  timeout=timeout, filter=filter, verbose=verbose, **kargs)
 
-    a = TracerouteResult(a.res)
+    a = MultiProtocolTracerouteResult(a.res)
     if verbose:
         a.show()
     return a,b
